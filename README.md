@@ -5,4 +5,6 @@ Q1.py is the python code for question 1
 
 Q3.py is the python code for question 3 to generate AB model networks
 
+ABbonus.py is the python code for the bonus modified AB model
+
 
