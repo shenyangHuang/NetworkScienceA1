@@ -156,7 +156,7 @@ def connected_components(A, networkName, directed=False):
     n_components, labels = sparse.csgraph.connected_components(csgraph=A, directed=directed, return_labels=True)
     componentID, numNodes = np.unique(labels, return_counts=True)
     print ("number of connected component is: " + str(n_components))
-    print ("number of nodes in GCC is: " + str(np.max(numNodes)))
+    print ("portion of nodes in GCC is: " + str(np.max(numNodes) / A.shape[0]))
 
 
 #only undirected
@@ -171,7 +171,8 @@ def eigenvalue_distribution(A, networkName, directed=False):
         L = D - A
         eigenvalues, vecs = linalg.eigs(L.asfptype(), k=(n-2))
         eigenvalues = eigenvalues.real
-        spectralGap = np.where(eigenvalues > 0, eigenvalues, np.inf).argmin()
+        #spectralGap = np.where(eigenvalues > 0, eigenvalues, np.inf).argmin()
+        spectralGap = np.min(eigenvalues[eigenvalues > 0])
         print ("spectral gap is " + str(spectralGap))
         bins = np.linspace(0, np.max(eigenvalues), num=binNum)
         plt.hist(eigenvalues, bins=bins)
